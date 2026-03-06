@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 from src.news_fetcher import fetch_ai_news, format_article
 from src.news_ranker import rank_news_with_ai, rank_news_simple
+from src.news_summarizer import summarize_article
 from src.whatsapp_sender import format_news_message, send_whatsapp_message
 
 
@@ -66,6 +67,19 @@ def main():
         top_article = articles[0]
 
     print(f"Selected: {top_article['title']}")
+
+    print("Generating summary...")
+    try:
+        if openai_key:
+            top_article = summarize_article(top_article, openai_key)
+            if "summary" in top_article:
+                print("Generated AI summary")
+            else:
+                print("Summary generation skipped")
+        else:
+            print("No OpenAI key - skipping summary")
+    except Exception as e:
+        print(f"Warning: Could not generate summary: {e}")
 
     print("Sending WhatsApp message...")
     try:

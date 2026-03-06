@@ -1,7 +1,7 @@
 # AI News WhatsApp Alert - Development Reference
 
 ## Project Overview
-Automated daily AI news alert system that fetches AI-related news, ranks articles by importance using AI, and sends the top story to WhatsApp.
+Automated daily AI news alert system that fetches AI-related news, ranks articles by importance using AI, generates "Why it matters" summaries, and sends the top story to WhatsApp.
 
 ## Architecture
 ```
@@ -9,6 +9,7 @@ main.py                  # Entry point - orchestrates the workflow
 src/
 ├── news_fetcher.py      # Fetches AI news from NewsAPI (last 24 hours)
 ├── news_ranker.py       # Ranks articles using GPT-4o-mini or simple fallback
+├── news_summarizer.py   # Generates "Why it matters" summaries using GPT-4o-mini
 └── whatsapp_sender.py   # Sends messages via Twilio WhatsApp API
 .github/workflows/
 └── daily-news.yml       # GitHub Actions - runs daily at 10:00 AM CST (16:00 UTC)
@@ -27,7 +28,7 @@ All stored in `.env` (local) and GitHub Secrets (CI/CD):
 - `TWILIO_AUTH_TOKEN` - Twilio console
 - `TWILIO_WHATSAPP_NUMBER` - format: `whatsapp:+14155238886`
 - `YOUR_WHATSAPP_NUMBER` - format: `whatsapp:+14083944615`
-- `OPENAI_API_KEY` - optional, enables AI ranking
+- `OPENAI_API_KEY` - optional, enables AI ranking and summaries
 
 ## Common Issues
 1. **"Invalid From and To pair"** - WhatsApp numbers missing `whatsapp:` prefix or country code (`+1` for US)

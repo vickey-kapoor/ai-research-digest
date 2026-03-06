@@ -39,17 +39,24 @@ def format_news_message(article: dict) -> str:
     Format an article into a WhatsApp message.
 
     Args:
-        article: Article dictionary with title, description, source, url
+        article: Article dictionary with title, description, source, url, and optional summary
 
     Returns:
         Formatted message string
     """
+    summary_section = ""
+    if article.get("summary"):
+        summary_section = f"""
+💡 *Why it matters:*
+{article['summary']}
+"""
+
     message = f"""🤖 *Daily AI News Alert*
 
 📰 *{article['title']}*
 
 📝 {article['description']}
-
+{summary_section}
 🔗 {article['url']}
 
 _Source: {article['source']}_
