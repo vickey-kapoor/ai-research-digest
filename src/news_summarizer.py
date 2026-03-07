@@ -1,35 +1,48 @@
-"""Generate AI summaries for news articles."""
+"""Generate ELI5 (Explain Like I'm 5) summaries for research papers."""
 
 from openai import OpenAI
 
 
-def summarize_article(article: dict, api_key: str) -> dict:
+def summarize_research(research: dict, api_key: str) -> dict:
     """
-    Generate a "Why it matters" summary for an article using OpenAI.
+    Generate a simple, jargon-free summary for a research paper.
+
+    Summaries are written so a kid or grandma could understand them.
 
     Args:
-        article: Article dictionary with title, description, source, url
+        research: Research paper dictionary with title, description, source, url, authors
         api_key: OpenAI API key
 
     Returns:
-        Article dictionary with added 'summary' field
+        Research dictionary with added 'summary' field
     """
     if not api_key:
-        return article
+        return research
 
     client = OpenAI(api_key=api_key)
 
-    prompt = f"""You are an AI news analyst. Generate a brief "Why it matters" summary for this news article.
+    authors = research.get("authors", "Unknown")
 
-Title: {article['title']}
-Source: {article['source']}
-Description: {article['description']}
+    prompt = f"""You explain AI research to someone with NO technical background - like a grandma or a kid.
 
-Write 2-3 sentences explaining:
-1. The significance of this news
-2. How it might impact the AI industry, businesses, or everyday users
+Paper: {research['title']}
+Authors: {authors}
+Abstract: {research['description']}
 
-Be concise and insightful. Do not start with "Why it matters:" - just provide the summary directly."""
+Write 2-3 simple sentences explaining:
+1. What did the scientists/researchers build or discover? (use simple analogies)
+2. Why should a regular person care? How might this affect their life someday?
+
+RULES:
+- NO jargon (no "transformer", "architecture", "benchmark", "SOTA", "LLM", "neural network")
+- Use everyday analogies (like teaching, cooking, organizing, etc.)
+- Write like you're texting a friend who knows nothing about AI
+- Keep it friendly and conversational
+
+Example good summary:
+"Scientists taught an AI to solve tricky math problems by breaking them into smaller steps - like how a teacher shows their work. This could help future AI assistants explain their thinking instead of just giving answers."
+
+Now write the summary:"""
 
     try:
         response = client.chat.completions.create(
@@ -40,10 +53,10 @@ Be concise and insightful. Do not start with "Why it matters:" - just provide th
         )
 
         summary = response.choices[0].message.content.strip()
-        article_with_summary = article.copy()
-        article_with_summary["summary"] = summary
-        return article_with_summary
+        research_with_summary = research.copy()
+        research_with_summary["summary"] = summary
+        return research_with_summary
 
     except Exception as e:
         print(f"Warning: Could not generate summary: {e}")
-        return article
+        return research

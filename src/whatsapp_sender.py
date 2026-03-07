@@ -34,31 +34,45 @@ def send_whatsapp_message(
     return sent_message.sid
 
 
-def format_news_message(article: dict) -> str:
+def _truncate(text: str, max_len: int) -> str:
+    """Truncate text to max length, adding ellipsis if needed."""
+    if len(text) <= max_len:
+        return text
+    return text[: max_len - 3].rsplit(" ", 1)[0] + "..."
+
+
+def format_research_message(research: dict) -> str:
     """
-    Format an article into a WhatsApp message.
+    Format research into a WhatsApp message with ELI5 summary.
 
     Args:
-        article: Article dictionary with title, description, source, url, and optional summary
+        research: Research paper dictionary with title, authors, description, url, summary
 
     Returns:
-        Formatted message string
+        Formatted message string (max 1600 chars for WhatsApp)
     """
-    summary_section = ""
-    if article.get("summary"):
-        summary_section = f"""
-💡 *Why it matters:*
-{article['summary']}
-"""
+    if not research:
+        return "*Daily AI Research*\n\nNo research found today."
 
-    message = f"""🤖 *Daily AI News Alert*
+    title = research.get("title", "Untitled")
+    authors = _truncate(research.get("authors", "Unknown"), 60)
+    source = research.get("source", "Unknown")
+    url = research.get("url", "")
 
-📰 *{article['title']}*
+    # ELI5 summary is the star - give it more space
+    summary = research.get("summary", "")
+    if summary:
+        summary = _truncate(summary, 280)
 
-📝 {article['description']}
-{summary_section}
-🔗 {article['url']}
+    # Build message
+    message = f"""*Daily AI Research*
 
-_Source: {article['source']}_
-"""
+*{title}*
+_{authors}_
+
+{summary}
+
+{url}
+_Source: {source}_"""
+
     return message

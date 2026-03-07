@@ -1,77 +1,63 @@
-"""Rank AI news by importance using OpenAI."""
-
-import json
-from typing import Optional
+"""Rank AI research by importance using OpenAI."""
 
 from openai import OpenAI
 
 
-def rank_news_with_ai(articles: list[dict], api_key: str) -> dict:
+def rank_research(research: list[dict], api_key: str) -> dict:
     """
-    Use OpenAI to select the most important AI news article.
+    Use OpenAI to select the most important AI research paper.
+
+    Focuses on AI Agents and Reasoning research.
 
     Args:
-        articles: List of article dictionaries
+        research: List of research paper dictionaries
         api_key: OpenAI API key
 
     Returns:
-        The most important article
+        The most important research paper
     """
-    if not articles:
-        raise ValueError("No articles to rank")
+    if not research:
+        raise ValueError("No research to rank")
 
-    if len(articles) == 1:
-        return articles[0]
+    if len(research) == 1:
+        return research[0]
 
     client = OpenAI(api_key=api_key)
 
-    # Prepare articles summary for the prompt
-    articles_text = "\n\n".join(
-        f"[{i+1}] Title: {a['title']}\nSource: {a['source']}\nDescription: {a['description']}"
-        for i, a in enumerate(articles)
+    # Prepare research summary for the prompt
+    research_text = "\n\n".join(
+        f"[{i+1}] Title: {r['title']}\nSource: {r['source']}\nAuthors: {r.get('authors', 'Unknown')}\nAbstract: {r['description']}"
+        for i, r in enumerate(research)
     )
 
-    prompt = f"""You are an AI news curator. Analyze these AI/ML news articles and select the ONE most important and impactful news story.
+    prompt = f"""You are an AI research curator specializing in AI Agents and Reasoning.
 
-Consider these factors:
-1. Significance to the AI industry (major breakthroughs, releases, regulations)
-2. Impact on everyday users and businesses
-3. Credibility of the source
-4. Novelty (prefer breaking news over ongoing stories)
+Select the ONE most important paper that would be most interesting to explain to a non-technical person.
 
-Articles:
-{articles_text}
+Consider:
+1. Relevance to AI Agents, autonomous systems, or reasoning
+2. How groundbreaking or novel the approach is
+3. Real-world impact potential (will regular people eventually feel this?)
+4. How "explainable" the concept is to a general audience
 
-Respond with ONLY the number of the most important article (e.g., "1" or "5"). No explanation needed."""
+Research Papers:
+{research_text}
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=10,
-        temperature=0,
-    )
+Respond with ONLY the number (e.g., "1" or "3"). No explanation."""
 
     try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=10,
+            temperature=0,
+        )
+
         selected_index = int(response.choices[0].message.content.strip()) - 1
-        if 0 <= selected_index < len(articles):
-            return articles[selected_index]
+        if 0 <= selected_index < len(research):
+            return research[selected_index]
     except (ValueError, IndexError):
         pass
 
-    # Fallback to first article if parsing fails
-    return articles[0]
-
-
-def rank_news_simple(articles: list[dict]) -> dict:
-    """
-    Simple ranking without AI - returns the first article (most relevant by NewsAPI).
-
-    Args:
-        articles: List of article dictionaries
-
-    Returns:
-        The first article (assumed most relevant)
-    """
-    if not articles:
-        raise ValueError("No articles to rank")
-    return articles[0]
+    # Fallback to first paper if parsing fails
+    return research[0]

@@ -1,23 +1,22 @@
-"""Main entry point for AI News WhatsApp Alert."""
+"""Main entry point for AI Research WhatsApp Digest."""
 
 import os
 import sys
 
 from dotenv import load_dotenv
 
-from src.news_fetcher import fetch_ai_news, format_article
-from src.news_ranker import rank_news_with_ai, rank_news_simple
-from src.news_summarizer import summarize_article
-from src.whatsapp_sender import format_news_message, send_whatsapp_message
+from src.research_fetcher import fetch_ai_research
+from src.news_ranker import rank_research
+from src.news_summarizer import summarize_research
+from src.whatsapp_sender import format_research_message, send_whatsapp_message
 
 
 def main():
-    """Fetch AI news, select the most important, and send to WhatsApp."""
+    """Fetch AI research, select the most important, and send to WhatsApp."""
     # Load environment variables
     load_dotenv()
 
     # Get required environment variables
-    news_api_key = os.getenv("NEWS_API_KEY")
     twilio_sid = os.getenv("TWILIO_ACCOUNT_SID")
     twilio_token = os.getenv("TWILIO_AUTH_TOKEN")
     twilio_whatsapp = os.getenv("TWILIO_WHATSAPP_NUMBER")
@@ -26,8 +25,6 @@ def main():
 
     # Validate required variables
     missing = []
-    if not news_api_key:
-        missing.append("NEWS_API_KEY")
     if not twilio_sid:
         missing.append("TWILIO_ACCOUNT_SID")
     if not twilio_token:
@@ -36,54 +33,49 @@ def main():
         missing.append("TWILIO_WHATSAPP_NUMBER")
     if not your_whatsapp:
         missing.append("YOUR_WHATSAPP_NUMBER")
+    if not openai_key:
+        missing.append("OPENAI_API_KEY")
 
     if missing:
         print(f"Error: Missing required environment variables: {', '.join(missing)}")
         sys.exit(1)
 
-    print("Fetching AI news...")
+    # Fetch AI research
+    print("Fetching AI research...")
+    research_items = []
     try:
-        raw_articles = fetch_ai_news(news_api_key, max_articles=10)
-        articles = [format_article(a) for a in raw_articles]
-        print(f"Found {len(articles)} articles")
+        research_items = fetch_ai_research(max_results=10)
+        print(f"Found {len(research_items)} research items")
     except Exception as e:
-        print(f"Error fetching news: {e}")
-        sys.exit(1)
+        print(f"Error fetching research: {e}")
 
-    if not articles:
-        print("No AI news found today")
+    # Check if we have any content
+    if not research_items:
+        print("No AI research found today")
         sys.exit(0)
 
-    print("Selecting most important news...")
+    # Rank and select top research
+    print("Selecting most important research...")
     try:
-        if openai_key:
-            top_article = rank_news_with_ai(articles, openai_key)
-            print("Used AI ranking")
-        else:
-            top_article = rank_news_simple(articles)
-            print("Used simple ranking (no OpenAI key)")
+        top_research = rank_research(research_items, openai_key)
+        print(f"Selected: {top_research['title']}")
     except Exception as e:
-        print(f"Error ranking news: {e}")
-        top_article = articles[0]
+        print(f"Error ranking research: {e}")
+        top_research = research_items[0]
 
-    print(f"Selected: {top_article['title']}")
-
-    print("Generating summary...")
+    # Generate ELI5 summary
+    print("Generating simple summary...")
     try:
-        if openai_key:
-            top_article = summarize_article(top_article, openai_key)
-            if "summary" in top_article:
-                print("Generated AI summary")
-            else:
-                print("Summary generation skipped")
-        else:
-            print("No OpenAI key - skipping summary")
+        top_research = summarize_research(top_research, openai_key)
+        if "summary" in top_research:
+            print("Generated ELI5 summary")
     except Exception as e:
         print(f"Warning: Could not generate summary: {e}")
 
+    # Send WhatsApp message
     print("Sending WhatsApp message...")
     try:
-        message = format_news_message(top_article)
+        message = format_research_message(top_research)
         message_sid = send_whatsapp_message(
             twilio_sid,
             twilio_token,

@@ -1,0 +1,99 @@
+"""Aggregate AI research from multiple sources."""
+
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
+from difflib import SequenceMatcher
+from typing import Callable
+
+from src.fetchers.arxiv_fetcher import fetch_arxiv_papers
+from src.fetchers.huggingface_fetcher import fetch_huggingface_papers
+from src.fetchers.pwc_fetcher import fetch_pwc_papers
+from src.fetchers.blog_fetcher import fetch_blog_posts
+
+
+def _title_similarity(title1: str, title2: str) -> float:
+    """Calculate similarity ratio between two titles."""
+    return SequenceMatcher(
+        None,
+        title1.lower().strip(),
+        title2.lower().strip(),
+    ).ratio()
+
+
+def _deduplicate_papers(papers: list[dict], threshold: float = 0.85) -> list[dict]:
+    """
+    Remove duplicate papers based on title similarity.
+
+    Args:
+        papers: List of paper dictionaries
+        threshold: Similarity threshold for considering papers as duplicates
+
+    Returns:
+        Deduplicated list of papers
+    """
+    if not papers:
+        return []
+
+    unique_papers = []
+    for paper in papers:
+        title = paper.get("title", "")
+        is_duplicate = False
+
+        for existing in unique_papers:
+            existing_title = existing.get("title", "")
+            if _title_similarity(title, existing_title) >= threshold:
+                is_duplicate = True
+                break
+
+        if not is_duplicate:
+            unique_papers.append(paper)
+
+    return unique_papers
+
+
+def fetch_ai_research(max_results: int = 5) -> list[dict]:
+    """
+    Fetch AI Agents & Reasoning research from all sources in parallel.
+
+    Args:
+        max_results: Maximum number of research items to return
+
+    Returns:
+        Combined, deduplicated, and sorted list of research items
+    """
+    fetchers: list[tuple[str, Callable, int]] = [
+        ("arXiv", fetch_arxiv_papers, 5),
+        ("Hugging Face", fetch_huggingface_papers, 5),
+        ("Papers With Code", fetch_pwc_papers, 5),
+        ("Blogs", fetch_blog_posts, 3),
+    ]
+
+    all_research = []
+
+    # Fetch from all sources in parallel
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        future_to_source = {
+            executor.submit(fetcher, count): source
+            for source, fetcher, count in fetchers
+        }
+
+        for future in as_completed(future_to_source):
+            source = future_to_source[future]
+            try:
+                results = future.result()
+                print(f"Fetched {len(results)} items from {source}")
+                all_research.extend(results)
+            except Exception as e:
+                print(f"Error fetching from {source}: {e}")
+
+    # Deduplicate by title similarity
+    unique_research = _deduplicate_papers(all_research)
+    print(f"After deduplication: {len(unique_research)} unique items")
+
+    # Sort by published date (most recent first)
+    unique_research.sort(
+        key=lambda x: x.get("published_at", ""),
+        reverse=True,
+    )
+
+    return unique_research[:max_results]
