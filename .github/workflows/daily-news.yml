@@ -8,6 +8,9 @@ on:
     - cron: '0 16 * * *'
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   send-news:
     runs-on: ubuntu-latest
