@@ -13,6 +13,7 @@ src/
 ├── news_ranker.py       # Ranks research using GPT-4o-mini
 ├── news_summarizer.py   # Generates ELI5 summaries
 ├── whatsapp_sender.py   # Sends messages via Twilio WhatsApp API
+├── pdf_generator.py     # Generates grandma-friendly PDF reports
 └── fetchers/            # Research source fetchers
     ├── __init__.py
     ├── arxiv_fetcher.py      # arXiv API (cs.AI, cs.LG, cs.CL categories)
@@ -25,10 +26,18 @@ src/
 
 ## Data Flow
 ```
-fetch_ai_research() ─► rank_research() ─► summarize_research() ─► format_research_message() ─► send()
+fetch_ai_research() ─► rank_research() ─► summarize_research() ─┬─► format_research_message() ─► send()
+       │                                                         │
+       │                                                         └─► generate_research_pdf() ─► save to reports/DD-Mon/
        │
        └─► parallel fetch from 4 sources ─► deduplicate by title (0.85 similarity) ─► sort by date
 ```
+
+## PDF Reports
+- Saved to `reports/{DD-Mon}/` folder (e.g., `reports/06-Mar/`)
+- Grandma-friendly format with large fonts
+- Sections: Title, Authors, "What's This About?" (ELI5), Technical Details, Link
+- Auto-generated alongside WhatsApp notification
 
 ## Key Dependencies
 - `requests` - API HTTP calls (Hugging Face, Papers With Code)

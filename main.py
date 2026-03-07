@@ -9,6 +9,7 @@ from src.research_fetcher import fetch_ai_research
 from src.news_ranker import rank_research
 from src.news_summarizer import summarize_research
 from src.whatsapp_sender import format_research_message, send_whatsapp_message
+from src.pdf_generator import generate_research_pdf
 
 
 def main():
@@ -69,8 +70,16 @@ def main():
         top_research = summarize_research(top_research, openai_key)
         if "summary" in top_research:
             print("Generated ELI5 summary")
-    except Exception as e:
-        print(f"Warning: Could not generate summary: {e}")
+    except Exception:
+        print("Warning: Could not generate summary")
+
+    # Generate PDF report
+    print("Generating PDF report...")
+    try:
+        pdf_path = generate_research_pdf(top_research)
+        print(f"PDF saved: {pdf_path}")
+    except Exception:
+        print("Warning: Could not generate PDF")
 
     # Send WhatsApp message
     print("Sending WhatsApp message...")
