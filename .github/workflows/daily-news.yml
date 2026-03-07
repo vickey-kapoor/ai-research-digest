@@ -34,3 +34,11 @@ jobs:
           YOUR_WHATSAPP_NUMBER: ${{ secrets.YOUR_WHATSAPP_NUMBER }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python main.py
+
+      - name: Commit and push PDF reports
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add reports/
+          git diff --staged --quiet || git commit -m "Add daily research PDF report for $(date +'%d-%b-%Y')"
+          git push
