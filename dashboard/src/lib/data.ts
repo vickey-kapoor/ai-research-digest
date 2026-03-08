@@ -51,13 +51,11 @@ export function getPapers(): Paper[] {
     try {
       const parsed = JSON.parse(PAPERS_JSON);
       _papers = parsed.papers as Paper[];
-      console.log('[DATA] Parsed papers from JSON string, count:', _papers.length);
     } catch (e) {
       console.error('[DATA] Failed to parse PAPERS_JSON:', e);
       _papers = [];
     }
   }
-  console.log('[DATA] getPapers returning:', _papers.length);
   return _papers;
 }
 
@@ -66,7 +64,6 @@ export function getDigests(): Digest[] {
     try {
       const parsed = JSON.parse(DIGESTS_JSON);
       _digests = parsed.digests as Digest[];
-      console.log('[DATA] Parsed digests from JSON string, count:', _digests.length);
     } catch (e) {
       console.error('[DATA] Failed to parse DIGESTS_JSON:', e);
       _digests = [];
