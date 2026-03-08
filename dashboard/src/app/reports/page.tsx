@@ -22,8 +22,6 @@ export default function ReportsPage({
 
   const pdfApiPath = selectedDigest?.pdf_path
     ? `/api/reports/${selectedDigest.pdf_path.replace(/^reports\//, "")}`
-    : undefined;
-    ? `/api/reports/${selectedDigest.pdf_path.replace(/^reports\//, '')}`
     : selectedDate
       ? `/api/reports/${selectedDate}/ai_research_digest.pdf`
       : undefined;
@@ -135,9 +133,6 @@ export default function ReportsPage({
             <CardContent>
               {pdfApiPath ? (
                 <div className="bg-gray-100 rounded-lg overflow-hidden" style={{ height: "700px" }}>
-                  <iframe src={pdfApiPath} className="w-full h-full" title={`Report for ${selectedDate}`} />
-              {selectedDate ? (
-                <div className="bg-gray-100 rounded-lg overflow-hidden" style={{ height: '700px' }}>
                   <iframe
                     src={pdfApiPath}
                     className="w-full h-full"
@@ -147,9 +142,7 @@ export default function ReportsPage({
               ) : (
                 <div className="flex items-center justify-center h-96 bg-gray-50 rounded-lg">
                   <p className="text-gray-500">
-                    {selectedDate
-                      ? "This report is listed but no PDF path was found in digest data."
-                      : "Select a report from the list to view"}
+                    Select a report from the list to view
                   </p>
                 </div>
               )}
