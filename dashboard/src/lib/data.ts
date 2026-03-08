@@ -42,6 +42,7 @@ const digestsData: { digests: Digest[] } = {"digests":[{"date":"2026-03-08","top
 const configData: Config = {"keywords":["AI agent","autonomous agent","reasoning","chain of thought","CoT","ReAct","tool use","planning","multi-agent","agentic"],"sources":{"arxiv":true,"huggingface":true,"pwc":true,"blogs":true},"schedule":"0 16 * * *","whatsapp_enabled":true};
 
 export function getPapers(): Paper[] {
+  console.log('[DATA] getPapers called, returning', papersData.papers.length, 'papers');
   return papersData.papers || [];
 }
 
