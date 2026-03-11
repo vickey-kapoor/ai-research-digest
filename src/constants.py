@@ -1,9 +1,9 @@
-"""Centralized constants for AI Research WhatsApp Digest."""
+"""Centralized constants for AI Research Telegram Digest."""
 
 import os
 
 # Application info
-APP_NAME = "AI Research WhatsApp Digest"
+APP_NAME = "AI Research Telegram Digest"
 APP_VERSION = "1.0.0"
 USER_AGENT = f"{APP_NAME}/{APP_VERSION} (https://github.com/vickey-kapoor/ai-research-whatsapp-digest)"
 
@@ -16,7 +16,6 @@ DEDUP_SIMILARITY_THRESHOLD = float(os.getenv("DEDUP_SIMILARITY_THRESHOLD", "0.85
 
 # Digest settings
 DIGEST_MAX_RESULTS = int(os.getenv("DIGEST_MAX_RESULTS", "10"))
-WHATSAPP_MAX_CHARS = 1600
 
 # Keywords for AI Agents & Reasoning research
 AGENT_REASONING_KEYWORDS = [
