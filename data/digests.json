@@ -2,11 +2,11 @@
   "digests": [
     {
       "date": "2026-03-11",
-      "top_paper_id": null,
+      "top_paper_id": "18d9cdfe-a5fc-4fae-b635-400991da0b98",
       "papers_fetched": 10,
-      "pdf_path": "reports/11-Mar/InternVL-U_Democratizing_Unified_Multimodal_Model.pdf",
+      "pdf_path": "reports/11-Mar/Do_What_I_Say_A_Spoken_Prompt_Dataset_for_Instruc.pdf",
       "whatsapp_sent": true,
-      "workflow_run_id": "22935604525",
+      "workflow_run_id": "22964538201",
       "telegram_sent": true
     },
     {

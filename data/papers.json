@@ -1,6 +1,66 @@
 {
   "papers": [
     {
+      "id": "18d9cdfe-a5fc-4fae-b635-400991da0b98",
+      "title": "Do What I Say: A Spoken Prompt Dataset for Instruction-Following",
+      "description": "Speech Large Language Models (SLLMs) have rapidly expanded, supporting a wide range of tasks. These models are typically evaluated using text prompts, which may not reflect real-world scenarios where users interact with speech. To address this gap, we introduce DoWhatISay (DOWIS), a multilingual dataset of human-recorded spoken and written prompts designed to pair with any existing benchmark for realistic evaluation of SLLMs under spoken instruction conditions. Spanning 9 tasks and 11 languag...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.09881",
+      "published_at": "2026-03-10T16:39:46+00:00",
+      "fetched_at": "2026-03-11T17:01:15.379531Z",
+      "authors": "Maike Züfle, Sara Papi, Fabian Retkowski, Szymon Mazurek, Marek Kasztelnik et al. (8 authors)",
+      "topics": [
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "ec0a698c-5f42-4f89-9602-b7e992c5916b",
+      "title": "Reward Prediction with Factorized World States",
+      "description": "Agents must infer action outcomes and select actions that maximize a reward signal indicating how close the goal is to being reached. Supervised learning of reward models could introduce biases inherent to training data, limiting generalization to novel goals and environments. In this paper, we investigate whether well-defined world state representations alone can enable accurate reward prediction across domains. To address this, we introduce StateFactory, a factorized representation method t...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.09400",
+      "published_at": "2026-03-10T09:12:20+00:00",
+      "fetched_at": "2026-03-11T17:01:15.379531Z",
+      "authors": "Yijun Shen, Delong Chen, Xianming Hu, Jiaming Mi, Hongbo Zhao et al. (7 authors)",
+      "topics": [],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "475fd858-aff9-4c3c-a51b-38e9c2884cd9",
+      "title": "Test-Driven AI Agent Definition (TDAD): Compiling Tool-Using Agents from Behavioral Specifications",
+      "description": "We present Test-Driven AI Agent Definition (TDAD), a methodology that treats agent prompts as compiled artifacts: engineers provide behavioral specifications, a coding agent converts them into executable tests, and a second coding agent iteratively refines the prompt until tests pass. Deploying tool-using LLM agents in production requires measurable behavioral compliance that current development practices cannot provide. Small prompt changes cause silent regressions, tool misuse goes undetect...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.08806",
+      "published_at": "2026-03-09T18:04:54+00:00",
+      "fetched_at": "2026-03-11T17:01:15.379531Z",
+      "authors": "Tzafrir Rehan",
+      "topics": [
+        "AI Agent",
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "048aeaa1-84d6-48d5-b8e7-05c876f6dafc",
+      "title": "Are Audio-Language Models Listening? Audio-Specialist Heads for Adaptive Audio Steering",
+      "description": "Multimodal large language models can exhibit text dominance, over-relying on linguistic priors instead of grounding predictions in non-text inputs. One example is large audio-language models (LALMs) where decisive audio evidence can be under-utilized even when it contains important information. To address this issue we use mechanistic interpretability to identify a small set of audio-specialist attention heads whose audio attention yields a ``listening'' signal. We show that this signal incre...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.06854",
+      "published_at": "2026-03-06T20:18:30+00:00",
+      "fetched_at": "2026-03-11T17:01:15.379531Z",
+      "authors": "Neta Glazer, Lenny Aharon, Ethan Fetaya",
+      "topics": [
+        "LLM",
+        "Transformer"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
       "id": "f879571c-6dff-42aa-b11a-fe26ca0240d5",
       "title": "Stepping VLMs onto the Court: Benchmarking Spatial Intelligence in Sports",
       "description": "Sports have long attracted broad attention as they push the limits of human physical and cognitive capabilities. Amid growing interest in spatial intelligence for vision-language models (VLMs), sports provide a natural testbed for understanding high-intensity human motion and dynamic object interactions. To this end, we present CourtSI, the first large-scale spatial intelligence dataset tailored to sports scenarios. CourtSI contains over 1M QA pairs, organized under a holistic taxonomy that s...",
