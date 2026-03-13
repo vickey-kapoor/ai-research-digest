@@ -1,6 +1,146 @@
 {
   "papers": [
     {
+      "id": "713d9eee-82dd-4c5d-8f96-2d6d856b6d4e",
+      "title": "XSkill: Continual Learning from Experience and Skills in Multimodal Agents",
+      "description": "Multimodal agents can now tackle complex reasoning tasks with diverse tools, yet they still suffer from inefficient tool use and inflexible orchestration in open-ended settings. A central challenge is enabling such agents to continually improve without parameter updates by learning from past trajectories. We identify two complementary forms of reusable knowledge essential for this goal: experiences, providing concise action-level guidance for tool selection and decision making, and skills, pr...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.12056",
+      "published_at": "2026-03-12T15:25:57+00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Guanyu Jiang, Zhaochen Su, Xiaoye Qu, Yi R., Fung",
+      "topics": [
+        "Reasoning",
+        "Tool Use"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "7431a422-1ff2-4359-8ba8-486a4f731db3",
+      "title": "Simple Recipe Works: Vision-Language-Action Models are Natural Continual Learners with Reinforcement Learning",
+      "description": "Continual Reinforcement Learning (CRL) for Vision-Language-Action (VLA) models is a promising direction toward self-improving embodied agents that can adapt in openended, evolving environments. However, conventional wisdom from continual learning suggests that naive Sequential Fine-Tuning (Seq. FT) leads to catastrophic forgetting, necessitating complex CRL strategies. In this work, we take a step back and conduct a systematic study of CRL for large pretrained VLAs across three models and fiv...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.11653",
+      "published_at": "2026-03-12T08:22:39+00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Jiaheng Hu, Jay Shim, Chen Tang, Yoonchang Sung, Bo Liu et al. (7 authors)",
+      "topics": [
+        "Vision"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "d624146a-8aa0-4319-b084-9f8fd1817413",
+      "title": "EndoCoT: Scaling Endogenous Chain-of-Thought Reasoning in Diffusion Models",
+      "description": "Recently, Multimodal Large Language Models (MLLMs) have been widely integrated into diffusion frameworks primarily as text encoders to tackle complex tasks such as spatial reasoning. However, this paradigm suffers from two critical limitations: (i) MLLMs text encoder exhibits insufficient reasoning depth. Single-step encoding fails to activate the Chain-of-Thought process, which is essential for MLLMs to provide accurate guidance for complex tasks. (ii) The guidance remains invariant during t...",
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2603.12252v1",
+      "published_at": "2026-03-12T00:00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Xuanlang Dai, Yujie Zhou, Long Xing, Jiazi Bu, Xilin Wei, Yuhong Liu, Beichen Zhang, Kai Chen, Yu...",
+      "topics": [
+        "cs.CL",
+        "Reasoning",
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "7ad6775b-fc18-410f-b5dc-000756c75aa5",
+      "title": "SciMDR: Benchmarking and Advancing Scientific Multimodal Document Reasoning",
+      "description": "Constructing scientific multimodal document reasoning datasets for foundation model training involves an inherent trade-off among scale, faithfulness, and realism. To address this challenge, we introduce the synthesize-and-reground framework, a two-stage pipeline comprising: (1) Claim-Centric QA Synthesis, which generates faithful, isolated QA pairs and reasoning on focused segments, and (2) Document-Scale Regrounding, which programmatically re-embeds these pairs into full-document tasks to e...",
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2603.12249v1",
+      "published_at": "2026-03-12T00:00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Ziyu Chen, Yilun Zhao, Chengye Wang, Rilyn Han, Manasi Patwardhan, Arman Cohan",
+      "topics": [
+        "Reasoning"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "73195cfe-fde0-4502-8eae-18139eedcb18",
+      "title": "Examining Reasoning LLMs-as-Judges in Non-Verifiable LLM Post-Training",
+      "description": "Reasoning LLMs-as-Judges, which can benefit from inference-time scaling, provide a promising path for extending the success of reasoning models to non-verifiable domains where the output correctness/quality cannot be directly checked. However, while reasoning judges have shown better performance on static evaluation benchmarks, their effectiveness in actual policy training has not been systematically examined. Therefore, we conduct a rigorous study to investigate the actual impact of non-reas...",
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2603.12246v1",
+      "published_at": "2026-03-12T00:00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Yixin Liu, Yue Yu, DiJia Su, Sid Wang, Xuewei Wang, Song Jiang, Bo Liu, Arman Cohan, Yuandong Tia...",
+      "topics": [
+        "Reasoning",
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "e1a8716e-6e37-46e3-88ef-f3f72ba28cf1",
+      "title": "Security Considerations for Artificial Intelligence Agents",
+      "description": "This article, a lightly adapted version of Perplexity's response to NIST/CAISI Request for Information 2025-0035, details our observations and recommendations concerning the security of frontier AI agents. These insights are informed by Perplexity's experience operating general-purpose agentic systems used by millions of users and thousands of enterprises in both controlled and open-world environments. Agent architectures change core assumptions around code-data separation, authority boundari...",
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2603.12230v1",
+      "published_at": "2026-03-12T00:00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Ninghui Li, Kaiyuan Zhang, Kyle Polley, Jerry Ma",
+      "topics": [
+        "AI Agent"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "64744419-17cc-48ce-a3b4-24fb7def0db9",
+      "title": "Sparking Scientific Creativity via LLM-Driven Interdisciplinary Inspiration",
+      "description": "Despite interdisciplinary research leading to larger and longer-term impact, most work remains confined to single-domain academic silos. Recent AI-based approaches to scientific discovery show promise for interdisciplinary research, but many prioritize rapidly designing experiments and solutions, bypassing the exploratory, collaborative reasoning processes that drive creative interdisciplinary breakthroughs. As a result, prior efforts largely prioritize automating scientific discovery rather ...",
+      "source": "arXiv",
+      "url": "https://arxiv.org/abs/2603.12226v1",
+      "published_at": "2026-03-12T00:00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Priyanka Kargupta, Shuhaib Mehri, Dilek Hakkani-Tur, Jiawei Han",
+      "topics": [
+        "Reasoning",
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "b9bff9c3-7cff-4fab-a196-b25aad781aed",
+      "title": "PACED: Distillation at the Frontier of Student Competence",
+      "description": "Standard LLM distillation wastes compute on two fronts: problems the student has already mastered (near-zero gradients) and problems far beyond its reach (incoherent gradients that erode existing capabilities). We show that this waste is not merely intuitive but structurally inevitable: the gradient signal-to-noise ratio in distillation provably vanishes at both pass-rate extremes. This theoretical observation leads to Paced, a framework that concentrates distillation on the zone of proximal ...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.11178",
+      "published_at": "2026-03-11T18:00:05+00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Yuanda Xu, Hejian Sang, Zhengze Zhou, Ran He, Zhipeng Wang",
+      "topics": [
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
+      "id": "cb77fd5a-4285-4039-af3a-46ab33eda405",
+      "title": "The Curse and Blessing of Mean Bias in FP4-Quantized LLM Training",
+      "description": "Large language models trained on natural language exhibit pronounced anisotropy: a small number of directions concentrate disproportionate energy, while the remaining dimensions form a broad semantic tail. In low-bit training regimes, this geometry becomes numerically unstable. Because blockwise quantization scales are determined by extreme elementwise magnitudes, dominant directions stretch the dynamic range, compressing long-tail semantic variation into narrow numerical bins. We show that t...",
+      "source": "Hugging Face",
+      "url": "https://huggingface.co/papers/2603.10444",
+      "published_at": "2026-03-11T05:59:12+00:00",
+      "fetched_at": "2026-03-13T16:50:30.942453Z",
+      "authors": "Hengjie Cao, Zhendong Huang, Mengyi Chen, Yifeng Yang, Fanqi Yu et al. (18 authors)",
+      "topics": [
+        "LLM"
+      ],
+      "ranking_score": 0,
+      "status": "unread"
+    },
+    {
       "id": "aed467f7-2fcd-47b6-a996-ae3c18fb47a9",
       "title": "Causal Concept Graphs in LLM Latent Space for Stepwise Reasoning",
       "description": "Sparse autoencoders can localize where concepts live in language models, but not how they interact during multi-step reasoning. We propose Causal Concept Graphs (CCG): a directed acyclic graph over sparse, interpretable latent features, where edges capture learned causal dependencies between concepts. We combine task-conditioned sparse autoencoders for concept discovery with DAGMA-style differentiable structure learning for graph recovery and introduce the Causal Fidelity Score (CFS) to evalu...",
